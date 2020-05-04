@@ -43,7 +43,6 @@ public class ProduitManager {
      * @throws IOException
      */
     public void afficherDetailProduit(Integer index) throws IOException {
-        BitcoinService bitcoinService = new BitcoinService();
         System.out.println(produits.get(index).toString() + ", " + bitcoinService.getBitcoinPrice(produits.get(index).getPrixEuro()) + " BTC");
     }
 
@@ -52,7 +51,6 @@ public class ProduitManager {
      * @throws IOException
      */
     public void initialiserCatalogue() throws IOException {
-        WebPageManager webPageManager = new WebPageManager();
         String catalogue = webPageManager.getPageContentsFromCacheIfExists("https://pjvilloud.github.io/ipi-java-240-cours/catalogue.txt");
         int nbProduits = 0;
         for(String line : catalogue.split("\n")){

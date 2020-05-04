@@ -4,8 +4,11 @@ import java.io.IOException;
 
 public class BitcoinService {
 
+    public ProduitManager(BitcoinService bitcoinService, ProduitManager produitManager) {
+        this.bitcoinService = bitcoinService;
+        this.produitManager = produitManager;
+    }
     private Double rate = null;
-
     private Boolean forceRefresh = false;
 
     /**
@@ -20,11 +23,10 @@ public class BitcoinService {
         }
 
         System.out.println("Récupération du cours du bitcoin sur site distant");
-        WebPageManager webPageManager = new WebPageManager();
 
         String apiResponse = webPageManager.getPageContents("https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=EUR");
-        apiResponse = apiResponse.replace("{\"EUR\":","");
-        apiResponse = apiResponse.replace("}","");
+        apiResponse = apiResponse.replace("{\"EUR\":","")
+                .replace("}","");
         rate = Double.parseDouble(apiResponse);
         return rate;
     }
@@ -36,7 +38,7 @@ public class BitcoinService {
      * @throws IOException si impossible d'accéder à la bourse
      */
     public Double getBitcoinPrice(Double prixEnEuro) throws IOException {
-        if(rate == null){
+        if(rate.equals(null)){
             getBitcoinRate();
         }
         return prixEnEuro / rate;
