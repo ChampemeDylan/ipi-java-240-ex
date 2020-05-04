@@ -6,10 +6,9 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        WebPageManager webPageManager = new WebPageManager();
-        BitcoinService bitcoinService = new BitcoinService(webPageManager);
-        ProduitManager pm = new ProduitManager(bitcoinService, webPageManager);
 
+        ProduitManager pm = new ProduitManager();
+        BitcoinService bitcoinService = new BitcoinService(false);
 
         System.out.println("Bienvenue !");
         while(true){
